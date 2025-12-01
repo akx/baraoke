@@ -10,7 +10,6 @@ WIDTH = 1280
 
 
 def play(job: Job):
-
     whisper_data = job.read_whisper_json()
     silence_data = job.read_silence_infos_json()
     initial_silence = None
@@ -47,7 +46,7 @@ def play(job: Job):
         for transcript in whisper_data.transcription:
             start_time_sec = transcript.offsets.from_ / 1000.0  # - initial_silence
             end_time_sec = transcript.offsets.to / 1000.0  # - initial_silence
-            dur = (end_time_sec - start_time_sec)
+            dur = end_time_sec - start_time_sec
             if dur <= 0.05:
                 continue
             progress = (music_pos_sec - start_time_sec) / dur
