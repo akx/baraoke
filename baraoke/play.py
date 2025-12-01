@@ -1,7 +1,5 @@
 import re
 
-import pygame
-
 from baraoke.job import Job
 
 HEIGHT = 720
@@ -10,6 +8,8 @@ WIDTH = 1280
 
 
 def play(job: Job):
+    import pygame
+
     whisper_data = job.read_whisper_json()
     silence_data = job.read_silence_infos_json()
     initial_silence = None
@@ -28,7 +28,7 @@ def play(job: Job):
 
     font = pygame.font.SysFont("Helvetica", 30)
     pygame.mixer.music.load(job.remuxed_low_vox_path)
-    music_start_offset = 20
+    music_start_offset = initial_silence or 0
     pygame.mixer.music.play(start=music_start_offset)
 
     print(initial_silence)

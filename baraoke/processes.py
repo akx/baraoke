@@ -1,6 +1,7 @@
 import json
 import re
 import subprocess
+import sys
 
 from baraoke import config
 
@@ -23,7 +24,7 @@ def download_song(url, orig_wav_path):
 def demucs_song(orig_wav_path):
     subprocess.check_call(
         [
-            config.demucs_python,
+            sys.executable,
             "-m",
             "demucs",
             "-d",
@@ -99,7 +100,7 @@ def find_silence_infos(vocal_input_path, silence_infos_json_path):
 def transcribe_vocals(vocal_input_path, json_path, language):
     subprocess.check_call(
         [
-            config.whisper_cpp_main,
+            config.whisper_cli,
             "-m",
             config.whisper_cpp_model_path,
             "-of",
